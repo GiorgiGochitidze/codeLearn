@@ -130,8 +130,45 @@ console.log(safe); // ❌ Error - let stays inside the block`,
       },
     ],
   },
-  {
+{
     id: "js-5",
+    section: "javascript",
+    title: "Tasks N1",
+    theoryBlocks: [
+      "***Task A — Introduce Yourself***\nDeclare variables for your name, age, city, and favourite food, then use them to build a sentence with console.log(). Feel free to use AI to check correctness of your code after checking the result.",
+      "***Task B — Fix the Broken Code***\nThe code below has 4 mistakes. Find and fix all of them. Think about: wrong keywords, reassigning things that shouldn't change, and outdated ways of declaring variables.",
+      "***Task C — Grocery Bill Calculator***\nDeclare variables for 3 item prices (e.g. bread, milk, cheese). Calculate the total, then apply a 10% discount, and log the final price to the console.\nExample output: Final price after discount: 13.5", "\n Also feel free to use AI to check correctness of your code after checking the result",
+    ],
+    codeExamples: [
+      {
+        label: "Task A — Example output:",
+        code: `Hello, my name is John, i'm 28 years old, i live in Batumi, and my favorite food is burger
+// Hint: use variable names and the + operator to connect strings
+// Don't forget spaces when joining strings: "Hello, " + name (note the space inside the quote)`,
+      },
+      {
+        label: "Task B — Fix all the mistakes in this code:",
+        code: `var username = "Anna";
+const score = 0;
+score = 10;
+let pi = 3.14;
+pi = 3;
+var isLoggedIn = true;`,
+      },
+      {
+        label: "Task C — Starting point:",
+        code: `const breadPrice = 2.5;
+const milkPrice = 1.8;
+const cheesePrice = 4.2;
+
+// 1. Calculate the total of all three
+// 2. Apply a 10% discount (multiply total by 0.9)
+// 3. Log the final price: "Final price after discount: ..."`,
+      },
+    ],
+  },
+  {
+    id: "js-6",
     section: "javascript",
     title: "Operators",
     theoryBlocks: [
@@ -206,7 +243,7 @@ if (age < 18 || !hasID) {
     ],
   },
   {
-    id: "js-6",
+    id: "js-7",
     section: "javascript",
     title: "if / else",
     theoryBlocks: [
@@ -265,7 +302,7 @@ if (isLoggedIn && isAdmin) {
     ],
   },
   {
-    id: "js-7",
+    id: "js-8",
     section: "javascript",
     title: "for Loop",
     theoryBlocks: [

@@ -96,7 +96,7 @@ function TheoryText({ text }: { text: string }) {
           {/* Theory */}
           <div className="space-y-4">
             {lesson.theoryBlocks.map((block, i) => (
-              <motion.p
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -104,7 +104,7 @@ function TheoryText({ text }: { text: string }) {
                 className="text-foreground/90 leading-relaxed whitespace-pre-line"
               >
                 <TheoryText text={block} />
-              </motion.p>
+              </motion.div>
             ))}
           </div>
 

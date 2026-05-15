@@ -144,7 +144,7 @@ export function CodeBlock({ code, label }: CodeBlockProps) {
   return (
     <div className="group relative">
       {label && (
-        <div className="mb-2 text-sm font-medium text-muted-foreground">
+        <div className="mb-2 text-sm font-medium text-muted-foreground whitespace-pre-line">
           {label}
         </div>
       )}
