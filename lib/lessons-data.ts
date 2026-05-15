@@ -22,6 +22,57 @@ export const lessonsData: Lesson[] = [
   {
     id: "js-1",
     section: "javascript",
+    title: "What is Javascript",
+    theoryBlocks: [
+      "Javascript is versatile, dynamically typed programming language that runs natively in web browsers and on servers. It is used for adding interactivity, logic and dynamic behaviour to static HTML and CSS.",
+      "Also Javascript helps us build interactive user interfaces using popular frameworks like: React, Vue.js and angular, enabling features like real-time updates and complex animations",
+    ],
+    codeExamples: [
+      {
+        label:
+          "Here is simple example of how you can write text in console using JS:",
+        code: 'console.log("Hello World";)',
+      },
+    ],
+  },
+  {
+    id: "js-2",
+    section: "javascript",
+    title: "Interpreter vs Compiler",
+    theoryBlocks: [
+      "***What is Interpreter?*** \n **Interpreter** is a program, which directly executes instructions written in programming language line by line, without first converting the entire source code into machine code. It directly reads code line by line and executes them no matter what, it starts reading from top and comes down as it goes.",
+      "***What is Compiler?*** \n **Compiler** is a program, which analyze whole program at once, it not just reads code line by line, but also ensures it follows language rules, such as: syntax analysis (checking structure), semantic analysis (checking logic), optimization (improving performance), and code generation (producing the final machine code)",
+      "***Key Difference***\n**Interpreter**: runs line by line, stops the moment it hits an error.\n**Compiler**: reads everything first, reports all errors at once, then runs.",
+    ],
+    codeExamples: [
+      {
+        label: "Interpreter behavior — stops at the first error",
+        code: `console.log("Line 1"); // ✅ runs
+console.log("Line 2"); // ✅ runs
+console.log(x);        // ❌ crashes here - x is not defined
+console.log("Line 4"); // never reached`,
+      },
+      {
+        label: "Compiler behavior — catches all errors before running",
+        code: `// A compiler would catch ALL of these before running anything:
+console.log(x)   // ❌ x is not defined
+console.log(y)   // ❌ y is not defined
+console.log(z)   // ❌ z is not defined
+
+// Only after fixing every error does your program run`,
+      },
+      {
+        label: "JavaScript is interpreted — so errors stop execution mid-way",
+        code: `console.log("Start");    // ✅ prints
+console.log("Middle");   // ✅ prints
+undefinedFunction();     // ❌ crashes - nothing after this runs
+console.log("End");      // never reached`,
+      },
+    ],
+  },
+  {
+    id: "js-3",
+    section: "javascript",
     title: "What is a Variable?",
     theoryBlocks: [
       "Imagine you're cooking and you need to remember how many eggs you have. You look in the fridge, count 6 eggs, and keep that number in your head. Your brain just stored a value. In programming, a variable does exactly that - it's a named place in your computer's memory that holds a value so you can use it later.",
@@ -44,11 +95,11 @@ eggs = 4; // we used 2 eggs, now it's 4`,
     ],
   },
   {
-    id: "js-2",
+    id: "js-4",
     section: "javascript",
     title: "var, let, const",
     theoryBlocks: [
-      'JavaScript has three ways to declare a variable. They all create a variable, but they behave differently in important ways.',
+      "JavaScript has three ways to declare a variable. They all create a variable, but they behave differently in important ways.",
       '"let" is the modern standard - use this by default. It can be changed after creation and only exists inside the block {} it was created in (block-scoped).',
       '"const" is short for constant - use this when the value should never change. It cannot be reassigned after creation. Also block-scoped. Use const for things like your name, a fixed price, a URL, or a configuration value.',
       '"var" is the old way - avoid it in modern code. It can be changed but is NOT block-scoped, meaning it leaks outside of if blocks and loops, which causes confusing bugs. It still works but is considered outdated.',
@@ -80,7 +131,7 @@ console.log(safe); // ❌ Error - let stays inside the block`,
     ],
   },
   {
-    id: "js-3",
+    id: "js-5",
     section: "javascript",
     title: "Operators",
     theoryBlocks: [
@@ -155,7 +206,7 @@ if (age < 18 || !hasID) {
     ],
   },
   {
-    id: "js-4",
+    id: "js-6",
     section: "javascript",
     title: "if / else",
     theoryBlocks: [
@@ -214,7 +265,7 @@ if (isLoggedIn && isAdmin) {
     ],
   },
   {
-    id: "js-5",
+    id: "js-7",
     section: "javascript",
     title: "for Loop",
     theoryBlocks: [
@@ -380,7 +431,7 @@ export function getPreviousLesson(currentId: string): Lesson | undefined {
 }
 
 export function getLessonProgress(
-  lessonId: string
+  lessonId: string,
 ): { current: number; total: number } | undefined {
   const lesson = getLessonById(lessonId);
   if (!lesson) return undefined;

@@ -40,6 +40,23 @@ export default function LessonPage({
     : "bg-react hover:bg-react-light";
   const borderColor = isJS ? "border-js/30" : "border-react/30";
 
+function TheoryText({ text }: { text: string }) {
+  const parts = text.split(/(\*\*\*.*?\*\*\*|\*\*.*?\*\*)/g);
+  return (
+    <span>
+      {parts.map((part, i) => {
+        if (part.startsWith("***") && part.endsWith("***")) {
+          return <h3 className="text-xl font-bold text-foreground" key={i}>{part.slice(3, -3)}</h3>;
+        }
+        if (part.startsWith("**") && part.endsWith("**")) {
+          return <strong key={i}>{part.slice(2, -2)}</strong>;
+        }
+        return part;
+      })}
+    </span>
+  );
+}
+
   return (
     <div className="min-h-screen pb-32 md:pb-8">
       {/* Lesson Header */}
@@ -84,9 +101,9 @@ export default function LessonPage({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + i * 0.05 }}
-                className="text-foreground/90 leading-relaxed"
+                className="text-foreground/90 leading-relaxed whitespace-pre-line"
               >
-                {block}
+                <TheoryText text={block} />
               </motion.p>
             ))}
           </div>
@@ -137,7 +154,9 @@ export default function LessonPage({
                 >
                   <ChevronLeft className="w-5 h-5 text-muted-foreground" />
                   <div className="text-left">
-                    <div className="text-xs text-muted-foreground">Previous</div>
+                    <div className="text-xs text-muted-foreground">
+                      Previous
+                    </div>
                     <div className="font-medium text-foreground">
                       {prevLesson.title}
                     </div>
