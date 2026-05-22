@@ -31,7 +31,7 @@ export const lessonsData: Lesson[] = [
       {
         label:
           "Here is simple example of how you can write text in console using JS:",
-        code: 'console.log("Hello World";)',
+        code: 'console.log("Hello World");',
       },
     ],
   },
