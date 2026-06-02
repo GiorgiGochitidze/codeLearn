@@ -130,14 +130,15 @@ console.log(safe); // ❌ Error - let stays inside the block`,
       },
     ],
   },
-{
+  {
     id: "js-5",
     section: "javascript",
     title: "Tasks N1",
     theoryBlocks: [
       "***Task A — Introduce Yourself***\nDeclare variables for your name, age, city, and favourite food, then use them to build a sentence with console.log(). Feel free to use AI to check correctness of your code after checking the result.",
       "***Task B — Fix the Broken Code***\nThe code below has 4 mistakes. Find and fix all of them. Think about: wrong keywords, reassigning things that shouldn't change, and outdated ways of declaring variables.",
-      "***Task C — Grocery Bill Calculator***\nDeclare variables for 3 item prices (e.g. bread, milk, cheese). Calculate the total, then apply a 10% discount, and log the final price to the console.\nExample output: Final price after discount: 13.5", "\n Also feel free to use AI to check correctness of your code after checking the result",
+      "***Task C — Grocery Bill Calculator***\nDeclare variables for 3 item prices (e.g. bread, milk, cheese). Calculate the total, then apply a 10% discount, and log the final price to the console.\nExample output: Final price after discount: 13.5",
+      "\n Also feel free to use AI to check correctness of your code after checking the result",
     ],
     codeExamples: [
       {
@@ -342,6 +343,273 @@ for (let i = 0; i < students.length; i++) {
       },
     ],
   },
+  {
+    id: "js-9",
+    section: "javascript",
+    title: "Array Method: forEach",
+    theoryBlocks: [
+      "The `.forEach()` method is a cleaner, more readable alternative to a traditional `for` loop when you want to execute a function on every element of an array.",
+      "Instead of maintaining a manual counter variable (like `let i = 0`), `.forEach()` provides the current element directly as an argument inside a callback function.",
+      "Important Rule: `.forEach()` is designed to produce side-effects (like updating external arrays, logging data, or modifying state). It always returns `undefined`, which means you cannot chain other array methods after it.",
+    ],
+    codeExamples: [
+      {
+        label: "Syntax overview vs traditional loop",
+        code: `const logs = ["User login", "Page view", "Logout"];
+
+// Traditional way
+for (let i = 0; i < logs.length; i++) {
+  console.log(logs[i]);
+}
+
+// Clean functional way using forEach
+logs.forEach(log => console.log(log));`,
+      },
+      {
+        label: "Practical Use Case: Categorizing Server Response Statuses",
+        code: `const requests = [
+  { url: "/home", status: 200 },
+  { url: "/login", status: 401 },
+  { url: "/dashboard", status: 200 },
+  { url: "/admin", status: 403 },
+];
+
+const successfulUrls = [];
+const errorUrls = [];
+
+// Populating distinct validation arrays via side-effects
+requests.forEach((req) => {
+  req.status === 200 ? successfulUrls.push(req.url) : errorUrls.push(req.url);
+});`,
+      },
+    ],
+  },
+  {
+    id: "js-10",
+    section: "javascript",
+    title: "Array Method: reduce",
+    theoryBlocks: [
+      "The `.reduce()` method processes an array element-by-element to compute and return a single cumulative value.",
+      "It requires a callback function with two main parameters: the Accumulator (`acc`) which accumulates the running results, and the Current value (`curr`) representing the item being processed.",
+      "Crucially, you must always provide an initial value as the second argument to `.reduce()`. This initial value can be a number (`0`), an empty object (`{}`), an empty array (`[]`), or any other data type.",
+      "Whatever you return from the callback function automatically becomes the Accumulator value for the next item in line.",
+    ],
+    codeExamples: [
+      {
+        label: "Aggregating Order Ledger Totals (Number Initial Value)",
+        code: `const orders = [
+  { product: "Book", total: 15, quantity: 2 },
+  { product: "Lamp", total: 45, quantity: 1 },
+  { product: "Pen", total: 2, quantity: 5 }
+];
+
+// Accumulating values starting from 0
+const transactionTotal = orders.reduce((acc, curr) => acc + (curr.total * curr.quantity), 0);
+console.log(transactionTotal); // 85`,
+      },
+      {
+        label: "Re-mapping Nested Arrays Dynamically (Object Initial Value)",
+        code: `const employees = [
+  { name: "Alex", department: "Engineering" },
+  { name: "Mia", department: "Design" },
+  { name: "Chris", department: "Engineering" }
+];
+
+// Grouping strings into custom array categories dynamically
+const departmentMap = employees.reduce((acc, curr) => {
+  if (!acc[curr.department]) {
+    acc[curr.department] = [];
+  }
+  acc[curr.department].push(curr.name);
+  return acc;
+}, {});
+
+console.log(departmentMap); // { Engineering: ["Alex", "Chris"], Design: ["Mia"] }`,
+      },
+    ],
+  },
+  {
+    id: "js-11",
+    section: "javascript",
+    title: "Array Method: filter",
+    theoryBlocks: [
+      "The `.filter()` method creates a new array filled with all elements that pass a specific test condition provided by a callback function.",
+      "Inside the callback, you write a conditional expression that returns either `true` or `false` for each item. If an item matches the criteria (`true`), it is copied into the new array; if it evaluates to `false`, it is completely skipped.",
+      "Key Advantage: Unlike `.forEach()`, `.filter()` does not change or mutate your original source array. It seamlessly generates a new, clean array subset.",
+    ],
+    codeExamples: [
+      {
+        label: "Isolating passing elements from datasets",
+        code: `const classGrades = [55, 68, 90, 42, 88, 71];
+
+// Isolate passing benchmarks (e.g., 70 or above)
+const passingGrades = classGrades.filter(grade => grade >= 70);
+
+console.log(passingGrades); // [90, 88, 71]`,
+      },
+      {
+        label: "Filtering complex object states",
+        code: `const userSessions = [
+  { username: "Ben", activeSession: true },
+  { username: "Lia", activeSession: false },
+  { username: "Dan", activeSession: true }
+];
+
+const liveUsers = userSessions.filter(session => session.activeSession);
+console.log(liveUsers); // Logs array items for Ben and Dan`,
+      },
+    ],
+  },
+  {
+    id: "js-12",
+    section: "javascript",
+    title: "Array Method: find",
+    theoryBlocks: [
+      "The `.find()` method returns the value of the very first element in an array that satisfies a testing condition.",
+      "It reads your array items sequentially from left to right. The exact moment it hits an item that yields a `true` outcome from your condition, it instantly exits the iteration loop and hands back that specific item.",
+      "Crucial Distinction: While `.filter()` keeps looking to gather an array of *all* matches, `.find()` stops immediately at the *first* match and returns just that single element value. If no elements pass the test, it returns `undefined`.",
+    ],
+    codeExamples: [
+      {
+        label: "Finding an item by unique identifier reference",
+        code: `const assets = [
+  { sku: "A101", weight: 5 },
+  { sku: "B902", weight: 12 },
+  { sku: "C440", weight: 3 }
+];
+
+// Instantly stops search loop at first confirmation match
+const targetAsset = assets.find(asset => asset.sku === "B902");
+console.log(targetAsset); // { sku: "B902", weight: 12 }`,
+      },
+    ],
+  },
+  {
+    id: "js-13",
+    section: "javascript",
+    title: "Filter vs Find vs Reduce",
+    theoryBlocks: [
+      "Choosing between `.filter()`, `.find()`, and `.reduce()` is all about matching the tool to the structure of your desired output.",
+      "Use `.filter()` when your goal is to narrow down an array, but you still expect to get a list (array) of elements back (0 or more items).",
+      "Use `.find()` when you are searching for one exact item and you need the literal element value or reference directly, instead of a wrapper collection.",
+      "Use `.reduce()` when you need a custom output type completely different from the source array—such as transforming an array down into an aggregated number, an analytical string, or a fully restructured nested lookup object map.",
+    ],
+    tables: [
+      {
+        title: "Comparison Matrix",
+        rows: [
+          [
+            "Method",
+            "Return Value Type",
+            "Iterates Full Array?",
+            "Primary Target Use Case",
+          ],
+          [
+            ".filter()",
+            "New Array (subset)",
+            "Always",
+            "Extracting lists matching criteria",
+          ],
+          [
+            ".find()",
+            "Single Element / Undefined",
+            "Stops at first match",
+            "Locating a specific structural reference",
+          ],
+          [
+            ".reduce()",
+            "Any custom type (number, obj, etc.)",
+            "Always",
+            "Aggregating values, maps, and structures",
+          ],
+        ],
+      },
+    ],
+    codeExamples: [
+      {
+        label: "Different results from the same data criteria",
+        code: `const supportTickets = [
+  { ticketId: 1, open: true },
+  { ticketId: 2, open: true },
+  { ticketId: 3, open: false }
+];
+
+// filter() yields a filtered subset array
+const activeTickets = supportTickets.filter(t => t.open); // [ticket 1, ticket 2]
+
+// find() yields the literal target object reference directly
+const priorityTicket = supportTickets.find(t => t.open);  // ticket 1 object reference
+
+// reduce() yields an aggregated metric
+const openCount = supportTickets.reduce((acc, curr) => curr.open ? acc + 1 : acc, 0); // 2`,
+      },
+    ],
+  },
+  {
+    id: "js-14",
+    section: "javascript",
+    title: "Array Method: flat",
+    theoryBlocks: [
+      "The `.flat()` method creates a brand new array where all sub-array elements are systematically extracted and concatenated into it up to a specified depth limit.",
+      "By default, if you don't pass an argument to `.flat()`, it will automatically flatten your array exactly 1 level deep.",
+      "Combining `.flat()` with `.reduce()` allows you to quickly transform multi-dimensional nested matrices into clean, unified, and unique datasets.",
+    ],
+    codeExamples: [
+      {
+        label: "Normalizing nesting layers into clean unique tables",
+        code: `const coordinateBatches = [
+  [10, 20],
+  [20, 30, 40],
+  [40, 50]
+];
+
+const unifiedCoordinates = coordinateBatches.flat(); // [10, 20, 20, 30, 40, 40, 50]
+
+// Cleaning up duplications dynamically with reduce lookup passes
+const uniqueCoordinates = unifiedCoordinates.reduce((acc, curr) => {
+  if (!acc.includes(curr)) {
+    acc.push(curr);
+  }
+  return acc;
+}, []);
+
+console.log(uniqueCoordinates); // [10, 20, 30, 40, 50]`,
+      },
+    ],
+  },
+  {
+    id: "js-15",
+    section: "javascript",
+    title: "Array Method: sort",
+    theoryBlocks: [
+      "The `.sort()` method reorganizes the items of an array directly in place, meaning it mutates the original source array rather than making a copy.",
+      "By default, `.sort()` treats everything as strings. If you try to sort numbers natively without a custom compare function, it will yield broken results (e.g., `10` comes before `2` because '1' is smaller than '2').",
+      "To resolve this, you must supply a compare function: `(a, b) => a - b` sorts values in an **Ascending** order, while `(b, a) => b - a` or `(a, b) => b - a` arranges items in a **Descending** structure.",
+    ],
+    codeExamples: [
+      {
+        label: "Sorting Object Properties (Numerical Sorting)",
+        code: `const boxes = [{ weight: 45 }, { weight: 12 }, { weight: 89 }];
+
+// Sort weights from smallest to largest
+boxes.sort((a, b) => a.weight - b.weight);`,
+      },
+      {
+        label: "Advanced Use Case: Frequency Ranking Extraction Matrix",
+        code: `const streamLogs = "error info error warning error info";
+const tokens = streamLogs.split(" ");
+
+const frequencyTracker = tokens.reduce((acc, curr) => {
+  acc[curr] = (acc[curr] || 0) + 1;
+  return acc;
+}, {});
+
+// Convert map entries to pairs and sort them from most frequent to least
+const errorLeaderboard = Object.entries(frequencyTracker).sort((a, b) => b[1] - a[1]);
+console.log(errorLeaderboard); // [["error", 3], ["info", 2], ["warning", 1]]`,
+      },
+    ],
+  },
 
   // React Section
   {
@@ -370,15 +638,12 @@ for (let i = 0; i < students.length; i++) {
     codeExamples: [
       {
         label: "The HTML copy-paste problem",
-        code: `<!-- Page 1 -->
+        code: `<button class="btn btn-primary btn-rounded">Subscribe</button>
+
 <button class="btn btn-primary btn-rounded">Subscribe</button>
 
-<!-- Page 2 -->
 <button class="btn btn-primary btn-rounded">Subscribe</button>
-
-<!-- Page 3 -->
-<button class="btn btn-primary btn-rounded">Subscribe</button>
-<!-- Change needed everywhere manually! -->`,
+`,
       },
       {
         label: "Defining a React component once",
